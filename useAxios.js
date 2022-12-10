@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export const useAxios = (configObj) => {
-    const { axiosInstance, method, url, requestConfig = {} } = configObj;
+export const useAxios = (config) => {
+    const { axiosInstance, method, url, requestConfig = {} } = config;
 
     const [response, setResponse] = useState([]);
     const [error, setError] = useState('');
@@ -19,11 +19,10 @@ export const useAxios = (configObj) => {
                     ...requestConfig,
                     signal: controller.signal,
                 });
-                console.log(res);
+
                 setResponse(res.data);
                 setError('');
             } catch (err) {
-                console.log(err.message);
                 setError(err.message);
             } finally {
                 setLoading(false);
